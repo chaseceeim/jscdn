@@ -3,12 +3,12 @@ pipelines:
     - step:
         name: Push to GitHub
         script:
-          - git remote add github https://$GITHUB_TOKEN@github.com/your-username/cdn.git
+          - git remote add github https://$GITHUB_TOKEN@github.com/chaseceeim/jscdn.git
           - git push github main
   branches:
     main:
       - step:
           name: Push to GitHub
           script:
-            - git remote add github https://$GITHUB_TOKEN@github.com/your-username/cdn.git
+            - git remote add github https://$GITHUB_TOKEN@github.com/chaseceeim/jscdn.git
             - git push github main
