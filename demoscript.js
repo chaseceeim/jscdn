@@ -1,6 +1,5 @@
 // demo-config.js - Host this in your repo
 console.log("demoscript.js loaded");
-console.log("config:", config);
 const createDemoBox = (config) => {
   const {
     vimeoId,
