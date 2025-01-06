@@ -18,31 +18,34 @@ const createDemoBox = (config) => {
     return;
   }
 
-  // Create elements
-  const modal = document.createElement("div");
+  // Change document.body to window.parent.document.body
+  const parentDoc = window.parent.document;
+
+  // Create elements using the parent document
+  const modal = parentDoc.createElement("div");
   modal.className = "demo-modal";
 
-  const iframeContainer = document.createElement("div");
+  const iframeContainer = parentDoc.createElement("div");
   iframeContainer.className = "demo-iframe-container";
   iframeContainer.style.maxWidth = `${width}px`;
 
-  const iframe = document.createElement("iframe");
+  const iframe = parentDoc.createElement("iframe");
   iframe.className = "demo-iframe";
   iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
   iframe.allow = "autoplay; fullscreen";
 
-  const closeButton = document.createElement("button");
+  const closeButton = parentDoc.createElement("button");
   closeButton.className = "demo-close-button";
   closeButton.textContent = "×";
 
-  const container = document.createElement("div");
+  const container = parentDoc.createElement("div");
   container.className = "demo-container";
 
-  const titleEl = document.createElement("h3");
+  const titleEl = parentDoc.createElement("h3");
   titleEl.className = "demo-title";
   titleEl.textContent = title;
 
-  const button = document.createElement("button");
+  const button = parentDoc.createElement("button");
   button.className = "demo-button";
   button.textContent = "Watch Demo";
 
@@ -70,8 +73,14 @@ const createDemoBox = (config) => {
   container.appendChild(titleEl);
   container.appendChild(button);
 
-  document.body.appendChild(modal);
-  document.body.appendChild(container);
+  parentDoc.body.appendChild(modal);
+  parentDoc.body.appendChild(container);
 };
 
 window.createDemoBox = createDemoBox;
+
+// Inject CSS into parent document
+const style = window.parent.document.createElement("link");
+style.rel = "stylesheet";
+style.href = "https://cdn.jsdelivr.net/gh/chaseceeim/jscdn/demo-styles.css";
+window.parent.document.head.appendChild(style);
